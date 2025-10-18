@@ -27,6 +27,8 @@ pip install -r requirements.txt
 
 ## Usage
 
+### Run All Demonstrations
+
 Run the main script to generate all visualizations:
 ```bash
 python networkx_talk.py
@@ -43,6 +45,24 @@ This will:
   - `tree.png`
   - `stack.png`
   - `deque.png`
+
+### Use Individual Functions
+
+You can also import and use individual functions:
+```bash
+python example_usage.py
+```
+
+Or in your own Python code:
+```python
+from networkx_talk import create_facebook_graph, create_tree
+
+# Create just the Facebook graph
+fb_graph = create_facebook_graph()
+
+# Create just the tree
+tree = create_tree()
+```
 
 ## Requirements
 
