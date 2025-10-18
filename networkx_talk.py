@@ -229,12 +229,14 @@ def create_tree():
     plt.figure(figsize=(10, 8))
     
     # Create a hierarchical layout for the tree
-    def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5):
+    def hierarchy_pos(G, root=None, width=1., vert_loc=0):
         """Create hierarchical layout for tree"""
         if root is None:
             root = [n for n in G.nodes() if G.in_degree(n) == 0][0]
         
-        def _hierarchy_pos(G, node, left, right, pos, parent=None, parsed=[]):
+        def _hierarchy_pos(G, node, left, right, pos, parent=None, parsed=None):
+            if parsed is None:
+                parsed = []
             if node not in parsed:
                 parsed.append(node)
                 neighbors = list(G.successors(node))
@@ -248,7 +250,7 @@ def create_tree():
                 pos[node] = ((left + right) / 2, vert_loc)
             return pos
         
-        return _hierarchy_pos(G, root, 0, width, {}, None, [])
+        return _hierarchy_pos(G, root, 0, width, {}, None, None)
     
     pos = hierarchy_pos(Tree, root=0)
     # Flip y-axis so root is at top
